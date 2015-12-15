@@ -1,0 +1,73 @@
+= Spring Boot using RESTful and MongoDB
+:toc: macros
+:javaDir: src/main/java
+:resourcesDir: src/main/resources
+
+toc::[]
+
+== Build configuration
+
+.Gradle build configuration: `build.gradle`
+[source,groovy]
+----
+include::build.gradle[]
+----
+
+.Maven build configuration: `pom.xml`
+[source,xml]
+----
+include::pom.xml[]
+----
+
+.`spring-boot-starter-parent`
+*   sets up the maven properties
+*   basic dependency to spring-core
+*   setting up location for resource files
+*   setting up maven plugins including the plugin provided by spring boot to run its application
+
+
+`spring-boot-starter-data-mongodb` - includes dependencies to mongo java driver, spring transaction, spring data for mongodb.
+
+
+== Spring Boot Application
+
+We need to create a main class which initializes the Spring Boot application and runs it. We also annotate the class with ``@SpringBootApplication``. This annotation is tells the Spring application to enable autoconfiguration and component scan and also tells the Spring application that this particular class is also a configuration:
+
+.`Application.java`
+[source,java]
+----
+include::{javaDir}/example/Application.java[]
+----
+
+`SpringBootApplication` - Indicates a configuration class that declares one or more `@Bean` methods and also triggers auto-configuration and component scanning. This is a convenience annotation that is equivalent to declaring ``@Configuration``, `@EnableAutoConfiguration` and ``@ComponentScan``.
+
+== Implementing the RESTful APIs
+
+.`Book.java`
+[source,java]
+----
+include::https://raw.githubusercontent.com/archie-lab/spring-examples/master/spring-boot/spring-boot-rest-mongodb/src/main/java/example/model/Book.java[]
+----
+
+.`BookRepository.java`
+[source,java]
+----
+include::{javaDir}/example/repository/BookRepository.java[]
+----
+
+The `MongoRepository` provides basic CRUD operation methods and also an API to find all documents in the collection.
+
+== Rest Controller
+
+.`BookController.java`
+[source,java]
+----
+include::{javaDir}/example/controller/BookController.java[]
+----
+
+== Connection to MongoDB
+
+.`application.properties`
+----
+include::{resourcesDir}/application.properties[]
+----
