@@ -1,7 +1,7 @@
-package example.controller;
+package fcode.controller;
 
-import example.model.Book;
-import example.repository.BookRepository;
+import fcode.model.Book;
+import fcode.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/api/book")
 public class BookController {
 
     @Autowired
